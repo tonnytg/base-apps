@@ -14,12 +14,10 @@ func main() {
 		fmt.Fprintf(w, "Hello World!")
 	})
 
-	// ListenAndServe listens on the TCP network address addr and then calls
-	// Serve with handler to handle requests on incoming connections.
-	if os.Getenv("PORT") != "" {
-		log.Println("Listening on port " + os.Getenv("PORT"))
-		log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
+	PORT := os.Getenv("PORT")
+	if PORT == "" {
+		PORT = "8080"
 	}
-	log.Println("Listening on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Println("Listening on port " + PORT)
+	log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }
